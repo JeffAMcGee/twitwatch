@@ -40,7 +40,7 @@ def main():
         if cpid == 0:
             # child
             print "starting on %s"%filename
-            with open(filename,'w') as f:
+            with open(filename,'w',1) as f:
                 store_tweets(config,f)
         else:
             # parent
