@@ -33,8 +33,8 @@ def main():
     config = settings[label]
 
     while True:
-        date_str = datetime.datetime.now().strftime("%Y_%m_%d.%H_%M")
-        filename = "%s/%s.json"%(config['directory'],date_str)
+        date_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
+        filename = "%s/%s.%s.txt"%(config['directory'],label,date_str)
 
         cpid = os.fork()
         if cpid == 0:
