@@ -16,7 +16,7 @@ def store_tweets(config, output_file):
     # read tweets from Twitter's streaming API and write them to a file.
     filter_url = 'https://stream.twitter.com/1/statuses/filter.json'
     r = requests.post(
-            config.get('url',filter_url),
+            config.get('stream_url',filter_url),
             data=config.get('params',None),
             auth=(config['username'],config['password']),
             )
