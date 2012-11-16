@@ -4,5 +4,6 @@ settings = dict(
         password = 'SECRET',
         params = {'track': 'aggies'},
         directory = '/home/you/aggies',
+        time_length = 15*60,
     ),
 )
