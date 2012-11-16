@@ -19,6 +19,7 @@ def store_tweets(config, output_file):
             config.get('stream_url',filter_url),
             data=config.get('params',None),
             auth=(config['username'],config['password']),
+            prefetch=False,
             )
 
     count = 0
