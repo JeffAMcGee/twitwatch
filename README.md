@@ -11,9 +11,9 @@ Copy settings_example.py to settings.py. Change the username, password, filter,
 and directory to store files in.  You can create additional dictionaries in
 settings if you want to run multiple crawlers.  Then you can run the crawler by
 running `crawl.py` followed by the name of the field in settings to use.  In
-the example settings, you can start the crawler by running this command:
+the example settings, you can start the link crawler by running this command:
 
-    ./crawl.py aggies
+    ./crawl.py link
 
 ## Notes
 The crawler process automatically kills the process and restarts it every 15

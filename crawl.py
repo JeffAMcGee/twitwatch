@@ -14,9 +14,10 @@ from settings import settings
 
 def store_tweets(config, output_file):
     # read tweets from Twitter's streaming API and write them to a file.
+    filter_url = 'https://stream.twitter.com/1/statuses/filter.json'
     r = requests.post(
-            'https://stream.twitter.com/1/statuses/filter.json',
-            data=config['params'],
+            config.get('url',filter_url),
+            data=config.get('params',None),
             auth=(config['username'],config['password']),
             )
 
@@ -44,7 +45,7 @@ def main():
                 store_tweets(config,f)
         else:
             # parent
-            time.sleep(config['time_length'])
+            time.sleep(config.get('time_length',15*60))
             os.kill(cpid, signal.SIGTERM)
             os.waitpid(cpid, 0)
 
