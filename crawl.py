@@ -47,6 +47,8 @@ def main():
         date_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
         filename = "%s/%s.%s.txt"%(config['directory'],label,date_str)
 
+        logging.info("creating child for %s from %d",filename,os.getpid())
+
         cpid = os.fork()
         if cpid == 0:
             # child
