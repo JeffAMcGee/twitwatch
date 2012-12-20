@@ -1,6 +1,7 @@
 #!/usr/bin/env python
 
 import datetime
+import logging
 import os
 import signal
 import sys
@@ -27,13 +28,21 @@ def store_tweets(config, output_file):
         if line: # filter out keep-alive new lines
             print>>output_file, line
             count +=1
-            if count%100==0:
-                print count
+            if count%1000==0:
+                logging.info("saved %d tweets",count)
+
 
 def main():
     label = sys.argv[1]
     config = settings[label]
+    log_dir = config.get('logs') or config['directory']
+    logging.basicConfig(
+        filename=os.path.join(log_dir,"%s.%d.log"%(label,os.getpid())),
+        format="%(levelname)s:%(module)s:%(asctime)s:%(message)s",
+        level=logging.INFO,
+    )
 
+    logging.info("starting to crawl %s",label)
     while True:
         date_str = datetime.datetime.now().strftime("%Y-%m-%d_%H-%M")
         filename = "%s/%s.%s.txt"%(config['directory'],label,date_str)
@@ -41,12 +50,17 @@ def main():
         cpid = os.fork()
         if cpid == 0:
             # child
-            print "starting on %s"%filename
-            with open(filename,'w',1) as f:
-                store_tweets(config,f)
+            logging.info("writing to new file: %s",filename)
+            try:
+                with open(filename,'w',1) as f:
+                    store_tweets(config,f)
+            except:
+                logging.exception("crash in child proc")
+                raise
         else:
             # parent
             time.sleep(config.get('time_length',15*60))
+            logging.info("killing %d",cpid)
             os.kill(cpid, signal.SIGTERM)
             os.waitpid(cpid, 0)
 
