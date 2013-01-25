@@ -59,6 +59,8 @@ def main():
             except:
                 logging.exception("crash in child proc")
                 raise
+            logging.info("unexpected death in %d",os.getpid())
+            break
         else:
             # parent
             time.sleep(config.get('time_length',15*60))
