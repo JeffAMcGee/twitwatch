@@ -32,3 +32,6 @@ even if the connection to Twitter breaks down.
 This is based on @bde's TwitterStreamSaver, but it uses the Requests library
 instead of libcurl. The requests code is based on an example from Requests'
 documentation.
+
+If you want to create the application as one user and run the crawlers as a
+different user, the connect.py script will help you generate the four tokens.

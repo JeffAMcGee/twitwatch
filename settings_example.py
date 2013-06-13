@@ -14,7 +14,7 @@ settings = dict(
         consumer_secret = 'FIXME_CONSUMER_SECRET',
         token_key = 'FIXME_ACCESS_TOKEN_KEY',
         token_secret = 'FIXME_ACCESS_TOKEN_SECRET',
-        stream_url = 'https://stream.twitter.com/1/statuses/sample.json',
+        stream_url = 'https://stream.twitter.com/1.1/statuses/sample.json',
         directory = '/home/you/sample',
     ),
     geo = dict(
