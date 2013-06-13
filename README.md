@@ -4,9 +4,18 @@ Twitwatch is a tool to listen to Twitter's streaming API and store tweets.
 
 
 ## Requirements
-Twitwatch needs a recent version of Python 2 and the Python requests library.
+Twitwatch needs a recent version of Python 2, Python requests (&gt;1.0), and
+requests-oauthlib (&gt;0.3.2).
 
 ## Usage
+Authenticating is trickier now that you are required to use oauth1.  First, you
+will need a Twitter Application. You can create one at
+https://dev.twitter.com/apps . When you create the application, it will give
+you a consumer key and consumer secret. Next, you should click "Create my
+access token" at the bottom of the page, which will create the access token and
+access token secret that you will also need.  Yes, you really do need four
+different strings to identify yourself to Twitter.
+
 Copy settings_example.py to settings.py. Change the username, password, filter,
 and directory to store files in.  You can create additional dictionaries in
 settings if you want to run multiple crawlers.  Then you can run the crawler by
