@@ -8,19 +8,25 @@ import sys
 import time
 
 import requests
+import requests_oauthlib
 
 # you will need to make settings.py based on settings_example.py
 from settings import settings
 
 
 def store_tweets(config, output_file):
-    # read tweets from Twitter's streaming API and write them to a file.
+    """ read tweets from Twitter's streaming API and write them to a file """
     filter_url = 'https://stream.twitter.com/1/statuses/filter.json'
+    headerauth = requests_oauthlib.OAuth1(
+            config['consumer_key'], config['consumer_secret'],
+            config['token_key'], config['token_secret'],
+            signature_type='auth_header',
+            )
     r = requests.post(
             config.get('stream_url',filter_url),
             data=config.get('params',None),
-            auth=(config['username'],config['password']),
-            prefetch=False,
+            auth=headerauth,
+            stream=True,
             )
 
     count = 0
@@ -33,6 +39,7 @@ def store_tweets(config, output_file):
 
 
 def main():
+    """ create a watchdog process to monitor the twitter crawler """
     label = sys.argv[1]
     config = settings[label]
     log_dir = config.get('logs') or config['directory']
