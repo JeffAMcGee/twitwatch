@@ -16,7 +16,7 @@ from settings import settings
 
 def store_tweets(config, output_file):
     """ read tweets from Twitter's streaming API and write them to a file """
-    filter_url = 'https://stream.twitter.com/1/statuses/filter.json'
+    filter_url = 'https://stream.twitter.com/1.1/statuses/filter.json'
     headerauth = requests_oauthlib.OAuth1(
             config['consumer_key'], config['consumer_secret'],
             config['token_key'], config['token_secret'],
